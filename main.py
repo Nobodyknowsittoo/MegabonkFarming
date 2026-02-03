@@ -3,38 +3,63 @@ from pynput import keyboard
 import threading
 import time
 
-spamming = False
+# home start button Point(x=3850, y=620)
+# confirm button for character and map Point(x=4650, y=1130)
 
-def spam_enter():
-    global spamming
-    while spamming:
-        pyautogui.press('enter')
-        time.sleep(0.05)
+character = {
+    "Fox" : (2780, 360),
+    "Sir Oofie" : (2980, 360),
+    "Calcium" : (3180, 360),
+    "Megachad" : (3380, 360),
+    "Ogre" : (2780, 560),
+    "CL4NK" : (2980, 560),
+    "Athena" : (3180, 560),
+    "Robinette" : (3380, 560),
+    "Monke" : (2780, 760),
+    "Tony McZoom" : (2980, 760),
+    "Bush" : (3180, 760),
+    "Birdo" : (3380, 760),
+    "Noelle" : (2780, 960),
+    "Amog" : (2980, 960),
+    "Spaceman" : (3180, 960),
+    "Bandit" : (3380, 960),
+    "Ninja" : (2780, 1160),
+    "Vlad" : (2980, 1160),
+    "Sir Chadwell" : (3180, 1160),
+    "Dicehead" : (3380, 1160),
+    "Roberto" : (2780, 1260)
+}
 
-def startingSpam():
-    global spamming
-    if not spamming:
-        spamming = True
-        threading.Thread(target=spam_enter, daemon=True).start()
-        print("Spamming started")
+def moveTo():
+    global running
+    running = True
+    for name, (x, y) in character.items():
+        if not running:
+            return
+        pyautogui.moveTo(x, y, duration=0.3)
+        time.sleep(0.5)
 
-def stopSpam():
-    global spamming
-    spamming = False
-    print("Spamming stopped")
+def startProgram():
+    whatCharacters = input("What Characters do you want to use for the sesssion? : ")
+
+def stopProgram():
+    global running
+    running = False
+    print("Stopped the program")
 
 def scanningPixelPosition():
     print(pyautogui.position())
 
 def on_press(key):
     if key == keyboard.Key.backspace:
-        stopSpam()
+        stopProgram()
 
 listenerStop = keyboard.Listener(on_press=on_press)
 listenerStop.start()
 
 with keyboard.GlobalHotKeys({
-    '<ctrl>+<shift>+r': startingSpam,
+    '<ctrl>+<shift>+r': startProgram,
     'p': scanningPixelPosition,
+    'r': moveTo,
 }) as h:
     h.join()
