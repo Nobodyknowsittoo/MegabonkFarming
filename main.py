@@ -6,7 +6,7 @@ import time
 # home start button Point(x=3850, y=620)
 # confirm button for character and map Point(x=4650, y=1130)
 
-character = {
+characters = {
     "Fox" : (2780, 360),
     "Sir Oofie" : (2980, 360),
     "Calcium" : (3180, 360),
