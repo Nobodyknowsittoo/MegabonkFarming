@@ -40,7 +40,18 @@ def moveTo():
         time.sleep(0.5)
 
 def startProgram():
-    whatCharacters = input("What Characters do you want to use for the sesssion? : ")
+    
+    global running
+    running = True
+
+    whatCharacter = input("What Character do you want to use for the sesssion? : ")
+    
+    time.sleep(0.5)
+    print("Automatically using for now the standard map")
+    time.sleep(0.5)
+    print("Open now the start window of Megabonk. The program will start in 5 seconds")
+    time.sleep(5)
+
 
 def stopProgram():
     global running
@@ -49,6 +60,10 @@ def stopProgram():
 
 def scanningPixelPosition():
     print(pyautogui.position())
+
+def scanningPixel():
+    xScan, yScan = pyautogui.position()
+    print(pyautogui.pixel(xScan, yScan))
 
 def on_press(key):
     if key == keyboard.Key.backspace:
@@ -61,5 +76,6 @@ with keyboard.GlobalHotKeys({
     '<ctrl>+<shift>+r': startProgram,
     'p': scanningPixelPosition,
     'r': moveTo,
+    'o': scanningPixel
 }) as h:
     h.join()
