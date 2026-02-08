@@ -32,11 +32,16 @@ characters = {
 
 def moveTo():
     global running
+
     running = True
-    for name, (x, y) in character.items():
+
+    for name, (x, y) in characters.items():
+        
         if not running:
             return
+        
         pyautogui.moveTo(x, y, duration=0.3)
+        
         time.sleep(0.5)
 
 def startProgram():
@@ -45,27 +50,33 @@ def startProgram():
     running = True
 
     whatCharacter = input("What Character do you want to use for the sesssion? : ")
-    
     time.sleep(0.5)
+    
     print("Automatically using for now the standard map")
     time.sleep(0.5)
+    
     print("Open now the start window of Megabonk. The program will start in 5 seconds")
     time.sleep(5)
 
 
 def stopProgram():
+    
     global running
     running = False
+    
     print("Stopped the program")
 
 def scanningPixelPosition():
+    
     print(pyautogui.position())
 
 def scanningPixel():
+    
     xScan, yScan = pyautogui.position()
     print(pyautogui.pixel(xScan, yScan))
 
 def on_press(key):
+    
     if key == keyboard.Key.backspace:
         stopProgram()
 
