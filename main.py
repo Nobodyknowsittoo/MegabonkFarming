@@ -30,7 +30,7 @@ characters = {
     "Roberto" : (2780, 1260)
 }
 
-def moveTo():
+def moveToAllCharacter():
     global running
 
     running = True
@@ -55,8 +55,19 @@ def startProgram():
     print("Automatically using for now the standard map")
     time.sleep(0.5)
     
-    print("Open now the start window of Megabonk. The program will start in 5 seconds")
-    time.sleep(5)
+    print("Open now the start window of Megabonk. The program will start in 10 seconds")
+    time.sleep(10)
+
+    for name, (x, y) in characters.items():
+
+        if not running:
+            return
+        
+        if name == whatCharacter:
+            pyautogui.moveTo(x, y)
+            pyautogui.click()
+            pyautogui.moveTo(4650, 1130)
+            pyautogui.click()
 
 
 def stopProgram():
@@ -86,7 +97,7 @@ listenerStop.start()
 with keyboard.GlobalHotKeys({
     '<ctrl>+<shift>+r': startProgram,
     'p': scanningPixelPosition,
-    'r': moveTo,
+    'v': moveToAllCharacter,
     'o': scanningPixel
 }) as h:
     h.join()
