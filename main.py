@@ -30,6 +30,18 @@ characters = {
     "Roberto" : (2780, 1260)
 }
 
+maps = {
+    "Forest" : (3050, 400),
+    "Desert" : (3050, 600),
+    "Boss" : (3050, 850)
+}
+
+tiers = {
+    "Tier 1" : (4525, 625),
+    "Tier 2" : (4560, 700),
+    "Tier 3" : (4575, 770),
+}
+
 def moveToAllCharacter():
     global running
 
@@ -44,19 +56,23 @@ def moveToAllCharacter():
         
         time.sleep(0.5)
 
-def startProgram():
-    
+def clickMap(whatMap):
     global running
-    running = True
 
-    whatCharacter = input("What Character do you want to use for the sesssion? : ")
-    time.sleep(0.5)
-    
-    print("Automatically using for now the standard map")
-    time.sleep(0.5)
-    
-    print("Open now the start window of Megabonk. The program will start in 10 seconds")
-    time.sleep(10)
+    for name, (x, y) in maps.items():
+
+        if not running:
+            return
+        
+        if name == whatMap:
+            pyautogui.moveTo(x, y)
+            pyautogui.click()
+            pyautogui.moveTo(4650, 1130)
+            pyautogui.click()
+
+def clickCharacter(whatCharacter):
+
+    global running
 
     for name, (x, y) in characters.items():
 
@@ -69,6 +85,25 @@ def startProgram():
             pyautogui.moveTo(4650, 1130)
             pyautogui.click()
 
+
+def startProgram():
+    
+    global running
+    running = True
+
+    whatCharacter = input("What Character do you want to use for the sesssion? : ")
+    time.sleep(0.5)
+
+    whatMap = input("What map would you like to farm on? (Forest|Desert|Boss) : ")
+    
+    print("Open now the start window of Megabonk. The program will start in 5 seconds")
+    time.sleep(5)
+
+    pyautogui.moveTo(3850, 620)
+    pyautogui.click()
+
+    clickCharacter(whatCharacter)
+    clickMap(whatMap)
 
 def stopProgram():
     
@@ -88,7 +123,7 @@ def scanningPixel():
 
 def on_press(key):
     
-    if key == keyboard.Key.backspace:
+    if key == keyboard.Key.f4:
         stopProgram()
 
 listenerStop = keyboard.Listener(on_press=on_press)
