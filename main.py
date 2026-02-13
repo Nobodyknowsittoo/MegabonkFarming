@@ -1,6 +1,5 @@
 import pyautogui
 from pynput import keyboard
-import threading
 import time
 
 # home start button Point(x=3850, y=620)
@@ -56,6 +55,21 @@ def moveToAllCharacter():
         
         time.sleep(0.5)
 
+def clickTier(whatTier):
+    global running
+
+    for name, (x, y) in tiers.items():
+
+        if not running:
+            return
+        
+        if name == whatTier:
+            pyautogui.moveTo(x, y)
+            pyautogui.click()
+            pyautogui.moveTo(4650, 1130)
+            pyautogui.click()
+
+
 def clickMap(whatMap):
     global running
 
@@ -91,10 +105,14 @@ def startProgram():
     global running
     running = True
 
-    whatCharacter = input("What Character do you want to use for the sesssion? : ")
+    whatCharacter = input("What Character do you want to use for the sesssion? (Please write the name correct) : ")
     time.sleep(0.5)
 
     whatMap = input("What map would you like to farm on? (Forest|Desert|Boss) : ")
+    time.sleep(0.5)
+
+    whatTier = input("What Tier would you like the play? (Tier 1| Tier 2| Tier 3) : ")
+    time.sleep(0.5)
     
     print("Open now the start window of Megabonk. The program will start in 5 seconds")
     time.sleep(5)
@@ -104,6 +122,7 @@ def startProgram():
 
     clickCharacter(whatCharacter)
     clickMap(whatMap)
+    clickTier(whatTier)
 
 def stopProgram():
     
