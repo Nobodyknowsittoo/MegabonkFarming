@@ -99,11 +99,29 @@ def clickCharacter(whatCharacter):
             pyautogui.moveTo(4650, 1130)
             pyautogui.click()
 
+def isUpgradeOpen(): # need to add logic for "pixel scanner"?
+    return
+
+def onDeathScreen(): # another "pixel scanner"?
+    return
+
+def afkCycle():
+
+    global whatCharacter
+    global whatMap
+    global whatTier
+    global running
 
 def startProgram():
+
+    global whatCharacter
+    global whatMap
+    global whatTier
     
     global running
     running = True
+
+    print("This is a silver and achievement farming script for the game Megabonk.\n\n After the configuration of what character, map and tier you wanna play you'll have 5 seconds to go to the main window.\n\n Also ensure that you have the whole game like it should be (including scrollbars like chracter selection beeing on standadrd etc.\n")
 
     whatCharacter = input("What Character do you want to use for the sesssion? (Please write the name correct) : ")
     time.sleep(0.5)
